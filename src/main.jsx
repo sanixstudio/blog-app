@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./pages/login/login";
-import { Register } from "./pages/register/register";
+import {Login, Register, Page404} from './pages'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +18,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/*",
+    element: <Page404 />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -27,3 +30,8 @@ root.render(
     <App />
   </RouterProvider>
 );
+
+
+// TODO: 
+// Create a protect route <Home/> OR <Articles/>
+// Make a layout
