@@ -1,10 +1,14 @@
 import React from "react";
+import { Navbar } from "./components";
+import Posts from "./pages/posts";
 
 function App() {
   return (
-    <div className="bg-gray-50 dark:bg-gray-700 min-h-screen">
-      <div className="text-3xl text-red-500">Navbar</div>
-      <div className="text-3xl text-red-500">Posts</div>
+    <div className="bg-gray-50 min-h-screen">
+      <div className="text-3xl text-red-500">
+        <Navbar />
+      </div>
+      <Posts />
     </div>
   );
 }
