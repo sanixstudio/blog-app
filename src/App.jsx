@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "./components";
-import Posts from "./pages/posts";
+import Posts from "./pages/posts/Posts";
 
 function App() {
   return (
