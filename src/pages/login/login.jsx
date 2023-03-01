@@ -20,7 +20,8 @@ const Login = () => {
       }),
       credentials: "include",
     });
-    const data = await res.json();
+
+    //TODO: Fix login to process only 200 response, username password comparison issue on backend
 
     if (res.status === 200) {
       alert("Logged in successfully, redirecting...");
