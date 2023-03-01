@@ -64,7 +64,7 @@ const Register = () => {
                   User ID
                 </label>
                 <input
-                autoComplete="false"
+                  autoComplete="false"
                   type="text"
                   name="username"
                   id="username"
@@ -82,7 +82,7 @@ const Register = () => {
                   Password
                 </label>
                 <input
-                autoComplete="false"
+                  autoComplete="false"
                   type="password"
                   name="password"
                   id="password"
@@ -100,7 +100,7 @@ const Register = () => {
                   Confirm password
                 </label>
                 <input
-                autoComplete="false"
+                  autoComplete="false"
                   type="password"
                   name="confirm-password"
                   id="confirm-password"
