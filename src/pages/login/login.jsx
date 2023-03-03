@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import Toast from "../../components/toast/Toast";
+import Layout from "../../layout/layout";
 
 const Login = () => {
   const Navigate = useNavigate();
@@ -34,7 +35,7 @@ const Login = () => {
   console.log(status);
 
   return (
-    <>
+    <Layout>
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
@@ -140,7 +141,7 @@ const Login = () => {
           </div>
         )}
       </section>
-    </>
+    </Layout>
   );
 };
 
