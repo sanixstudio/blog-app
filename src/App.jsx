@@ -1,16 +1,18 @@
 import React from "react";
-import { Navbar } from "./components";
 import Posts from "./pages/posts/Posts";
 import Layout from "./layout/layout";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const Navigate = useNavigate();
   const isLoggedIn = true;
-  return (
-    <div className="bg-gray-50 min-h-screen">
-      <Layout>
-        <Posts />
-      </Layout>
-    </div>
+
+  !isLoggedIn ? (
+    Navigate("/login")
+  ) : (
+    <Layout>
+      <Posts />
+    </Layout>
   );
 }
 
