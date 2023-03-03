@@ -3,12 +3,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import {Login, Register, Page404} from './pages'
+import { Login, Register, Page404 } from "./pages";
+import { UserContextProvider } from "./context/userContext";
+
+const isLoggedIn = false;
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: isLoggedIn ? <Login /> : <App />,
   },
   {
     path: "/login",
@@ -26,12 +29,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <RouterProvider router={router}>
-    <App />
-  </RouterProvider>
+  <UserContextProvider>
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
+  </UserContextProvider>
 );
-
-
-// TODO: 
-// Create a protect route <Home/> OR <Articles/>
-// Make a layout

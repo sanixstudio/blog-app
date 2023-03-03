@@ -1,18 +1,19 @@
 import React from "react";
 import Posts from "./pages/posts/Posts";
 import Layout from "./layout/layout";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "./context/userContext";
 
 function App() {
-  const Navigate = useNavigate();
-  const isLoggedIn = true;
+  const { userInfo } = React.useContext(UserContext);
+  console.log(userInfo);
 
-  !isLoggedIn ? (
-    Navigate("/login")
-  ) : (
-    <Layout>
-      <Posts />
-    </Layout>
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <Layout>
+        <Posts />
+      </Layout>
+    </div>
   );
 }
 
