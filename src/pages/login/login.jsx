@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Toast from "../../components/toast/Toast";
 import Layout from "../../layout/layout";
+import { API_LOGIN_PATH } from "../../constants";
 
 const Login = () => {
   const Navigate = useNavigate();
@@ -10,7 +11,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/login", {
+    const res = await fetch(API_LOGIN_PATH, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
