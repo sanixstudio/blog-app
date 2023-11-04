@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Toast from "../../components/toast/Toast";
 import Layout from "../../layout/layout";
-import { API_LOGIN_PATH } from "../../constants";
+import { LOGIN_PATH } from "../../constants";
 
 const Login = () => {
   const Navigate = useNavigate();
@@ -11,7 +11,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await fetch(API_LOGIN_PATH, {
+    const res = await fetch(LOGIN_PATH, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,20 +23,18 @@ const Login = () => {
       credentials: "include",
     });
 
-    //TODO: Fix login to process only 200 response, username password comparison issue on backend
-
-    if (res.status === 200) {
-      alert("Logged in successfully, redirecting...");
-      Navigate("/");
+    if (res.status === 201) {
+      toast.success("Logged in successfully, redirecting...");
+      setTimeout(() => Navigate("/"), 1500);
     } else {
-      alert("Password or username is incorrect");
+      toast.error("Password or username is incorrect");
     }
   };
 
   return (
     <Layout>
       <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-screen md:py-10 md:-mt-10">
           <a
             href="#"
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -48,7 +46,7 @@ const Login = () => {
             />
             Adi-Blog
           </a>
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
@@ -59,7 +57,7 @@ const Login = () => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    User ID
+                    Username
                   </label>
                   <input
                     type="text"
@@ -100,7 +98,7 @@ const Login = () => {
                     href="/register"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
-                    Sign up
+                    Register New
                   </a>
                 </p>
               </form>
@@ -108,6 +106,7 @@ const Login = () => {
           </div>
         </div>
       </section>
+      <Toaster />
     </Layout>
   );
 };

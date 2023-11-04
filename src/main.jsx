@@ -11,7 +11,7 @@ const isLoggedIn = false;
 const router = createBrowserRouter([
   {
     path: "/",
-    element: isLoggedIn ? <Login /> : <App />,
+    element: <App />,
   },
   {
     path: "/login",

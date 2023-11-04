@@ -1,5 +1,5 @@
-const API_PATH = "http://localhost:4000";
-const API_LOGIN_PATH = `${API_PATH}/login`;
-const API_REGISTER_PATH = `${API_PATH}/register`;
+const BASE_ROUTE = "http://localhost:4000";
+const LOGIN_PATH = `${BASE_ROUTE}/api/login`;
+const REGISTER_PATH = `${BASE_ROUTE}/api/register`;
 
-export { API_PATH, API_LOGIN_PATH, API_REGISTER_PATH };
+export { BASE_ROUTE, LOGIN_PATH, REGISTER_PATH };
