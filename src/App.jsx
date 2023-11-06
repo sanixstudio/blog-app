@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import Posts from "./pages/posts/Posts";
 import Layout from "./layout/layout";
-import { useAuth } from "./context/userContext";
 
 function App() {
   return (

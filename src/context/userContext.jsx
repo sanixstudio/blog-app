@@ -8,27 +8,29 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ token: null, username: null });
+  const [user, setUser] = useState({ token: null, user: null });
 
   useEffect(() => {
     // Check if a token exists in local storage or cookies
     const token = localStorage.getItem("authToken");
-    const username = localStorage.getItem("username");
+    const user = localStorage.getItem("user");
+    const parsedUser = JSON.parse(localStorage.getItem("user"));
     if (token) {
-      setUser({ token, username });
+      setUser({ token, user: parsedUser });
     }
   }, []);
 
-  const userLogin = (token, username) => {
+  const userLogin = (token, user) => {
     localStorage.setItem("authToken", token);
-    localStorage.setItem("username", username);
-    setUser({ token, username });
+    const stringifiedUser = JSON.stringify(user);
+    localStorage.setItem("user", stringifiedUser);
+    setUser({ token, user });
   };
 
   const userLogout = () => {
     localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
-    setUser({ token: null, username: null });
+    localStorage.removeItem("user");
+    setUser({ token: null, user: null });
   };
 
   return (

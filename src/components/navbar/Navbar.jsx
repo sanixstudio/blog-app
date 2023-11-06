@@ -1,8 +1,16 @@
 import React from "react";
 import { useAuth } from "../../context/userContext";
+import { BiSolidUserCircle } from "react-icons/bi";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const Navbar = () => {
   const { user, userLogout } = useAuth();
+  const capitalizeFirstLetter = (string) =>
+    string
+      ? string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+      : "";
+
+  const userProfile = user.user;
 
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
@@ -39,7 +47,25 @@ const Navbar = () => {
             ></path>
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+        <div
+          className="hidden w-full md:flex items-center md:w-auto"
+          id="navbar-default"
+        >
+          {userProfile && (
+            <div className="flex items-center gap-2 mr-10">
+              <BiSolidUserCircle size={28} color="white" />
+              <span className="text-white font-bold text-2xl mr-4">
+                {capitalizeFirstLetter(userProfile.name)}
+              </span>
+              <a
+                href="/new-post"
+                className="text-white flex justify-center items-center gap-2 px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 duration-300"
+              >
+                <BsFillPlusCircleFill />
+                <span>New Post</span>
+              </a>
+            </div>
+          )}
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <a
@@ -50,15 +76,15 @@ const Navbar = () => {
                 Home
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href="#"
                 className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 About
               </a>
-            </li>
-            {user?.username ? (
+            </li> */}
+            {userProfile ? (
               <li
                 onClick={() => userLogout()}
                 className="block py-2 pl-3 pr-4 text-gray-700 cursor-pointer rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"

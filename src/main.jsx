@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login, Register, Page404 } from "./pages";
+import { Login, Register, Page404, NewPost } from "./pages";
 import { AuthProvider } from "./context/userContext";
 
 const router = createBrowserRouter([
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/*",
     element: <Page404 />,
+  },
+  {
+    path: "/new-post",
+    element: <NewPost />,
   },
 ]);
 
