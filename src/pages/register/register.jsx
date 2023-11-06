@@ -3,6 +3,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../layout/layout";
 import { REGISTER_PATH } from "../../constants";
+import { useAuth } from "../../context/userContext";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +12,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { userLogin } = useAuth();
 
   const register = async (e) => {
     e.preventDefault();
@@ -26,6 +28,8 @@ const Register = () => {
         });
 
         if (response.status === 201) {
+          const data = await response.json();
+          userLogin(data.token, data.user);
           toast.success("Registered successfully!");
           setTimeout(() => navigate("/"), 1500);
         } else {

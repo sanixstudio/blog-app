@@ -3,11 +3,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../layout/layout";
 import { LOGIN_PATH } from "../../constants";
+import { useAuth } from "../../context/userContext";
 
 const Login = () => {
   const Navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const { userLogin } = useAuth();
 
   const login = async (e) => {
     e.preventDefault();
@@ -24,8 +27,11 @@ const Login = () => {
     });
 
     if (res.status === 201) {
+      // userLogin()
       toast.success("Logged in successfully, redirecting...");
       setTimeout(() => Navigate("/"), 1500);
+      const data = await res.json();
+      userLogin(data.token, data.user);
     } else {
       toast.error("Password or username is incorrect");
     }

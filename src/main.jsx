@@ -4,9 +4,7 @@ import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login, Register, Page404 } from "./pages";
-import { UserContextProvider } from "./context/userContext";
-
-const isLoggedIn = false;
+import { AuthProvider } from "./context/userContext";
 
 const router = createBrowserRouter([
   {
@@ -29,9 +27,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <UserContextProvider>
+  <AuthProvider>
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
-  </UserContextProvider>
+  </AuthProvider>
 );
