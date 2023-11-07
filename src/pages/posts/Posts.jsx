@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const data = [
   {
@@ -50,23 +50,49 @@ const data = [
 ];
 
 const Posts = () => {
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("http://localhost:4000/api/posts")
+      const data = await res.json();
+      setPosts(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  if (error) return <h1 className="text-4xl">Error</h1>;
+  if (loading) return <h1 className="text-4xl">Loading...</h1>;
+
+  console.log(posts);
+
   return (
     <>
-      {data.map((post) => (
+      {posts.map((post) => (
         <div
-          key={post.id}
+          key={post._id}
           className="flex flex-col items-center md:justify-between text-center md:text-left md:flex-row gap-5 mx-auto my-0 max-w-screen-xl mt-20 px-4"
         >
-          <img width={400} src={post.image} alt="cutie" />
+          {/* <img width={400} src={post.image} alt="cutie" /> */}
           <div className="self-start">
             <a href="/">
               <h1 className="text-4xl font-bold">{post.title}</h1>
             </a>
             <span className="font-bold inline-block mr-2 my-4 text-gray-600">
-              {post.author}
+              {post.author ? post.author : "Anonymous"}
             </span>
             <span className="font-bold text-gray-400">
-              {new Date(post.dataPosted).toLocaleDateString()}
+              {new Date(post.timestamp).toLocaleDateString()}
             </span>
             <p>{post.body}</p>
           </div>
