@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 const NewPost = () => {
   const { user } = useAuth();
-
+  console.log(user);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState(user);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !body || !author) {
+    if (!title || !body) {
       setError("All fields are required");
       return;
     }
@@ -24,13 +25,33 @@ const NewPost = () => {
     const newPost = {
       title,
       body,
-      author,
+      userId: user?.user.id,
     };
 
-    // Reset the form fields
-    setTitle("");
-    setBody("");
-    setAuthor("");
+    try {
+      setLoading(true);
+      const res = await fetch("http://localhost:4000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: user.token,
+        },
+        body: JSON.stringify(newPost),
+      });
+
+      if (res.ok) {
+        // Reset the form fields
+        setTitle("");
+        setBody("");
+        navigate("/");
+      } else {
+        throw new Error("Failed to create a new post.");
+      }
+    } catch (error) {
+      setError("An error occurred while creating the post.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
