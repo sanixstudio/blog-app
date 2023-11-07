@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login, Register, Page404, NewPost } from "./pages";
+import { Login, Register, Page404, NewPost, SinglePost } from "./pages";
 import { AuthProvider } from "./context/userContext";
 
 const router = createBrowserRouter([
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/new-post",
     element: <NewPost />,
+  },
+  {
+    path: "/posts/:postId",
+    element: <SinglePost />,
   },
 ]);
 
