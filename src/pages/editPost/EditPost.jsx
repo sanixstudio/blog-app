@@ -12,6 +12,8 @@ const EditPost = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  if (!user.user) navigate("/");
+
   const postId = pathname.split("/").pop();
 
   const fetchPost = async () => {

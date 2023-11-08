@@ -85,7 +85,8 @@ const SinglePost = () => {
             </button>
           </div>
         )}
-        <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+        <img src={"https://picsum.photos/id/237/800/500"} alt="cutie" />
+        <h1 className="text-3xl font-bold my-4 mt-8">{post.title}</h1>
         <div className="text-gray-700 mb-4">
           <span className="font-semibold">By:</span>{" "}
           {post?.author?.username || "Anonymous"}

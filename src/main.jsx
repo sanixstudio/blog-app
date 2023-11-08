@@ -10,6 +10,7 @@ import {
   NewPost,
   SinglePost,
   EditPost,
+  Dashboard,
 } from "./pages";
 import { AuthProvider } from "./context/userContext";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
   {
     path: "/register",

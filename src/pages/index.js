@@ -1,3 +1,4 @@
+export { default as Dashboard } from "./dashboard/Dashboard";
 export { default as Login } from "./login/login";
 export { default as NewPost } from "./newPost/NewPost";
 export { default as Register } from "./register/register";

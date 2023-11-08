@@ -5,8 +5,8 @@ const Post = ({ post }) => {
 
   return (
     <div className="flex flex-col items-center md:justify-between text-center md:text-left md:flex-row gap-5 mx-auto my-0 max-w-screen-xl mt-20 px-4">
-      {/* <img width={400} src={post.image} alt="cutie" /> */}
-      <div className="self-start">
+      <img width={400} src={'https://picsum.photos/id/237/500/300'} alt="cutie" />
+      <div className="self-start text-left w-full">
         <a href={`/post/${_id}`}>
           <h1 className="text-4xl font-bold">{title}</h1>
         </a>
