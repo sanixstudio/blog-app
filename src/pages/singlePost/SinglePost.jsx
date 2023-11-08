@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../layout/layout";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { useAuth } from "../../context/userContext";
+import { DeleteConfirmModal } from "../../components";
+import toast, { Toaster } from "react-hot-toast";
 
 const SinglePost = () => {
   const { user } = useAuth();
@@ -10,6 +12,8 @@ const SinglePost = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { pathname } = useLocation();
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const postId = pathname.split("/").pop();
 
@@ -26,28 +30,59 @@ const SinglePost = () => {
     }
   };
 
+  const handleDelete = async () => {
+    closeModal();
+
+    try {
+      const url = `http://localhost:4000/api/posts/${postId}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      if (response.ok) {
+        toast.success("Post created successfuly, redirecting...");
+        setTimeout(() => navigate("/"), 1000);
+      } else {
+        console.error("Delete request failed with status:", response.status);
+      }
+    } catch (error) {
+      console.error("An error occurred while deleting the post:", error);
+    }
+  };
+
   useEffect(() => {
     fetchPost();
   }, []);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>Error: {error}</h1>;
 
   const loggedUserId = user?.user?.id;
-  const postAutorId = post?.author?._id;
-  const isValidAuthor = loggedUserId === postAutorId;
+  const postAuthorId = post?.author?._id;
+  const isValidAuthor = loggedUserId === postAuthorId;
 
   return (
     <Layout>
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto my-8">
         {user.token && isValidAuthor && (
           <div className="flex justify-end mb-2 gap-4">
-            <a href="#">
+            <a href={`/post/edit/${post._id}`}>
               <AiOutlineEdit size={24} color="green" />
             </a>
-            <a href="#">
+            <button onClick={openModal}>
               <AiOutlineDelete size={24} color="red" />
-            </a>
+            </button>
           </div>
         )}
         <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
@@ -60,6 +95,12 @@ const SinglePost = () => {
         </div>
         <p className="text-gray-800 leading-relaxed">{post.body}</p>
       </div>
+      <DeleteConfirmModal
+        show={showModal}
+        onClose={closeModal}
+        onDelete={handleDelete}
+      />
+      <Toaster />
     </Layout>
   );
 };
