@@ -9,31 +9,37 @@ const Login = () => {
   const Navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { userLogin } = useAuth();
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await fetch(LOGIN_PATH, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-      credentials: "include",
-    });
+    try {
+      const res = await fetch(LOGIN_PATH, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+        credentials: "include",
+      });
 
-    if (res.status === 201) {
-      // userLogin()
-      toast.success("Logged in successfully, redirecting...");
-      setTimeout(() => Navigate("/"), 1500);
-      const data = await res.json();
-      userLogin(data.token, data.user);
-    } else {
-      toast.error("Password or username is incorrect");
+      if (res.status === 201) {
+        // userLogin()
+        toast.success("Logged in successfully, redirecting...");
+        setTimeout(() => Navigate("/"), 1500);
+        const data = await res.json();
+        userLogin(data.token, data.user);
+      } else {
+        toast.error("Password or username is incorrect");
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,6 +99,7 @@ const Login = () => {
                   />
                 </div>
                 <button
+                  disabled={loading}
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >

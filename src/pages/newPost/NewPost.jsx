@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/userContext";
+import toast, { Toaster } from "react-hot-toast";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
 
 const NewPost = () => {
   const { user } = useAuth();
-  console.log(user);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,7 +43,8 @@ const NewPost = () => {
         // Reset the form fields
         setTitle("");
         setBody("");
-        navigate("/");
+        toast.success("Post created successfuly, redirecting...");
+        setTimeout(() => navigate("/"), 1000);
       } else {
         throw new Error("Failed to create a new post.");
       }
@@ -88,6 +89,7 @@ const NewPost = () => {
             </div>
             <div>
               <button
+                disabled={loading}
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
               >
@@ -97,6 +99,7 @@ const NewPost = () => {
           </form>
         </div>
       </div>
+      <Toaster />
     </Layout>
   );
 };

@@ -33,10 +33,14 @@ const SinglePost = () => {
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>Error: {error}</h1>;
 
+  const loggedUserId = user?.user?.id;
+  const postAutorId = post?.author?._id;
+  const isValidAuthor = loggedUserId === postAutorId;
+
   return (
     <Layout>
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto my-8">
-        {user.token && (
+        {user.token && isValidAuthor && (
           <div className="flex justify-end mb-2 gap-4">
             <a href="#">
               <AiOutlineEdit size={24} color="green" />
