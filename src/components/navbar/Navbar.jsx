@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../context/userContext";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const { user, userLogout } = useAuth();
@@ -73,16 +74,29 @@ const Navbar = () => {
                 className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                 aria-current="page"
               >
-                Home
+                HOME
               </a>
             </li>
             {userProfile ? (
-              <li
-                onClick={() => userLogout()}
-                className="block py-2 pl-3 pr-4 text-gray-700 cursor-pointer rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Logout
-              </li>
+              <>
+                <li>
+                  <a
+                    href="/dashboard"
+                    className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    DASHBOARD
+                  </a>
+                </li>
+                <li
+                  onClick={() => userLogout()}
+                  className="flex items-center gap-2 py-2 pl-3 pr-4 text-gray-700 cursor-pointer rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  <span>LOGOUT</span>
+                  <span>
+                    <FiLogOut size={20} />
+                  </span>
+                </li>
+              </>
             ) : (
               <>
                 <li>
@@ -90,7 +104,7 @@ const Navbar = () => {
                     href="/login"
                     className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   >
-                    Login
+                    LOGIN
                   </a>
                 </li>
                 <li>
@@ -98,19 +112,11 @@ const Navbar = () => {
                     href="/register"
                     className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   >
-                    Register
+                    REGISTER
                   </a>
                 </li>
               </>
             )}
-            <li>
-              <a
-                href="/dashboard"
-                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Dashboard
-              </a>
-            </li>
           </ul>
         </div>
       </div>

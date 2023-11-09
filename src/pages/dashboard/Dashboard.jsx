@@ -1,15 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/userContext";
 import Layout from "../../layout/layout";
-import useFetchPosts from "../../hooks/useFetchPosts";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import ReactPaginate from "react-paginate";
 
 const Dashboard = () => {
-  const { user } = useAuth();
-  const { posts, error, loading } = useFetchPosts();
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  if (error) return <h1 className="text-4xl">Error: {error}</h1>;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  const postsPerPage = 10;
+
+  // useEffect(() => {
+  //   if (!user.user) {
+  //     navigate("/");
+  //   }
+  // }, [user.user, navigate]);
+
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`http://localhost:4000/api/posts/user-post/${user?.user?.id}`);
+      const data = await res.json();
+      setPosts(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  if (error) return <h1 className="text-4xl">Error: {error.message}</h1>; // Display the error message
   if (loading) return <h1 className="text-4xl">Loading...</h1>;
+
+  const indexOfLastPost = (currentPage + 1) * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.reverse().slice(indexOfFirstPost, indexOfLastPost);
+
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected;
+    setCurrentPage(selectedPage);
+  };
+
+  console.log(posts);
 
   return (
     <Layout>
@@ -29,7 +70,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
+              {currentPosts.map((post) => (
                 <tr key={post._id} className="hover:bg-gray-100">
                   <td className="py-2 px-4 font-semibold truncate">
                     {post.title}
@@ -55,18 +96,16 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+          <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={Math.ceil(posts.length / postsPerPage)}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+            className="max-w-screen-xl mx-auto flex py-4 mt-10 gap-6 justify-center bg-gray-100"
+          />
         </div>
-
-        {/* Section: Create a New Post */}
-        {/* <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-2">Create New Post</h2>
-          <Link
-            to="/create-post"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
-          >
-            Create Post
-          </Link>
-        </div> */}
       </div>
     </Layout>
   );
