@@ -15,16 +15,35 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 10;
 
-  // useEffect(() => {
-  //   if (!user.user) {
-  //     navigate("/");
-  //   }
-  // }, [user.user, navigate]);
+  useEffect(() => {
+    if (user.user) {
+      const delay = 1000; // Time delay in milliseconds (1 second)
+
+      // Use setTimeout to call fetchPosts after the delay
+      const timerId = setTimeout(() => {
+        fetchPosts();
+        console.log(posts);
+      }, delay);
+
+      // Clean up the timer when the component unmounts
+      return () => clearTimeout(timerId);
+    }
+  }, [user.user]);
 
   const fetchPosts = async () => {
+    console.log("user inside fetch", user);
+
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:4000/api/posts/user-post/${user?.user?.id}`);
+      const res = await fetch(
+        `http://localhost:4000/api/posts/user-posts/${user?.user?.id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const data = await res.json();
       setPosts(data);
     } catch (err) {
@@ -33,10 +52,6 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   if (error) return <h1 className="text-4xl">Error: {error.message}</h1>; // Display the error message
   if (loading) return <h1 className="text-4xl">Loading...</h1>;
@@ -49,8 +64,6 @@ const Dashboard = () => {
     const selectedPage = data.selected;
     setCurrentPage(selectedPage);
   };
-
-  console.log(posts);
 
   return (
     <Layout>
