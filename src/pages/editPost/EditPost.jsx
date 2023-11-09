@@ -42,9 +42,8 @@ const EditPost = () => {
       });
 
       if (response.ok) {
-        // Post updated successfully
-        // You can redirect the user to the single post page or another route
-        navigate(`/post/${postId}`);
+        // TODO: Post updated successfully, Toast
+        navigate(-1);
       } else {
         console.error("Update request failed with status:", response.status);
       }

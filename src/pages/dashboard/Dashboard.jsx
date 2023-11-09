@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/userContext";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import ReactPaginate from "react-paginate";
+import { DashBoardTable, DeleteConfirmModal } from "../../components";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -17,22 +18,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user.user) {
-      const delay = 1000; // Time delay in milliseconds (1 second)
-
-      // Use setTimeout to call fetchPosts after the delay
-      const timerId = setTimeout(() => {
-        fetchPosts();
-        console.log(posts);
-      }, delay);
-
-      // Clean up the timer when the component unmounts
-      return () => clearTimeout(timerId);
+      fetchPosts();
     }
   }, [user.user]);
 
   const fetchPosts = async () => {
-    console.log("user inside fetch", user);
-
     try {
       setLoading(true);
       const res = await fetch(
@@ -65,6 +55,37 @@ const Dashboard = () => {
     setCurrentPage(selectedPage);
   };
 
+  const handleDelete = async () => {
+    closeModal();
+
+    try {
+      const url = `http://localhost:4000/api/posts/${postId}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      if (response.ok) {
+        toast.success("Post created successfuly, redirecting...");
+        setTimeout(() => navigate("/"), 1000);
+      } else {
+        console.error("Delete request failed with status:", response.status);
+      }
+    } catch (error) {
+      console.error("An error occurred while deleting the post:", error);
+    }
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <Layout>
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-[1200px] mx-auto my-8">
@@ -73,42 +94,7 @@ const Dashboard = () => {
         {/* Section: List of Posts */}
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">My Posts</h2>
-          <table className="min-w-full">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="py-2 px-4">Title</th>
-                <th className="py-2 px-4">Body</th>
-                <th className="py-2 px-4">Date</th>
-                <th className="py-2 px-4">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentPosts.map((post) => (
-                <tr key={post._id} className="hover:bg-gray-100">
-                  <td className="py-2 px-4 font-semibold truncate">
-                    {post.title}
-                  </td>
-                  <td className="py-2 flex-1 line-clamp-1 px-4 leading-10">
-                    {post.body}
-                  </td>
-                  <td className="py-2 px-4">
-                    {new Date(post.timestamp).toLocaleDateString()}
-                  </td>
-                  <td className="flex py-2 px-4">
-                    <a
-                      href="#"
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
-                    >
-                      <AiOutlineEdit />
-                    </a>
-                    <button className="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-2 rounded-lg">
-                      <AiOutlineDelete />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <DashBoardTable currentPosts={currentPosts} openModal={openModal} />
           <ReactPaginate
             previousLabel={"Previous"}
             nextLabel={"Next"}
@@ -120,6 +106,11 @@ const Dashboard = () => {
           />
         </div>
       </div>
+      <DeleteConfirmModal
+        show={showModal}
+        onClose={closeModal}
+        onDelete={handleDelete}
+      />
     </Layout>
   );
 };
