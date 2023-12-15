@@ -4,3 +4,4 @@ export { default as DeleteConfirmModal } from "./deleteConfirmModal/DeleteConfir
 export { default as Post } from "./post/Post";
 export { default as DashBoardTable } from "./dashboardTable/DashboardTable";
 export { default as PostEditForm } from "./postEditForm/PostEditForm";
+export { default as Card } from "./card/Card";

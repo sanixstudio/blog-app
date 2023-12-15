@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Post } from "../../components";
+import { Card } from "../../components";
 import useFetchPosts from "../../hooks/useFetchPosts";
 import ReactPaginate from "react-paginate";
 
 const Posts = () => {
   const { posts, error, loading } = useFetchPosts();
   const [currentPage, setCurrentPage] = useState(0);
-  const postsPerPage = 5;
+  const postsPerPage = 8;
 
   if (error) return <h1 className="text-4xl">Error</h1>;
   if (loading) return <h1 className="text-4xl">Loading...</h1>;
@@ -22,19 +22,23 @@ const Posts = () => {
   };
 
   return (
-    <div>
-      {currentPosts.map((post) => (
-        <Post key={post._id} post={post} />
-      ))}
-
+    <div className="flex flex-col h- max-w-[1440px] mx-auto">
+      <div className="flex-1 my-10 mx-8 gap-8">
+        <div className="gap-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          {currentPosts.map((post) => (
+            <Card key={post._id} post={post} />
+          ))}
+        </div>
+      </div>
+      {/* Pagination */}
       <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
+        previousLabel={"< Previous"}
+        nextLabel={"Next >"}
         pageCount={Math.ceil(posts.length / postsPerPage)}
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
         activeClassName={"active"}
-        className=" max-w-screen-xl mx-auto flex py-4 my-10 gap-6 justify-center bg-gray-100"
+        className="max-w-screen-xl mx-auto flex py-4 gap-8 justify-center bg-gray-200 px-8 rounded-full"
       />
     </div>
   );
