@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 const Posts = () => {
   const { posts, error, loading } = useFetchPosts();
   const [currentPage, setCurrentPage] = useState(0);
-  const postsPerPage = 8;
+  const postsPerPage = 9;
 
   if (error) return <h1 className="text-4xl">Error</h1>;
   if (loading) return <h1 className="text-4xl">Loading...</h1>;

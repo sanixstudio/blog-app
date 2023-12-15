@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { FaRegEye } from "react-icons/fa";
 
 const DashboardTable = ({ currentPosts, openModal }) => {
   return (
@@ -26,14 +27,21 @@ const DashboardTable = ({ currentPosts, openModal }) => {
             </td>
             <td className="flex py-2 px-4">
               <a
+                href={`/post/${post._id}`}
+                target="_blank"
+                className="flex justify-center items-center bg-gray-400 hover:bg-gray-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
+              >
+                <FaRegEye />
+              </a>
+              <a
                 href={`/post/edit/${post._id}`}
-                className="flex justify-center items-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
+                className="flex justify-center items-center bg-blue-400 hover:bg-blue-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
               >
                 <AiOutlineEdit />
               </a>
               <button
                 onClick={openModal}
-                className="flex justify-center items-center bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-2 rounded-lg"
+                className="flex justify-center items-center bg-red-400 hover:bg-red-600 text-white font-medium py-1 px-2 rounded-lg"
               >
                 <AiOutlineDelete size={24} color="white" />
               </button>

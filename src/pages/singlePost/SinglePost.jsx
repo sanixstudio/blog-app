@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../layout/layout";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { FaArrowLeft } from "react-icons/fa6";
 import { useAuth } from "../../context/userContext";
 import { DeleteConfirmModal } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
+import TimeAgo from "react-timeago";
 
 const SinglePost = () => {
   const { user } = useAuth();
@@ -74,7 +76,13 @@ const SinglePost = () => {
 
   return (
     <Layout>
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto my-8">
+      <a href="/" className="my-8 flex items-center gap-3">
+        <span>
+          <FaArrowLeft />
+        </span>
+        Back to Home
+      </a>
+      <div className="bg-white shadow-lg rounded-lg p-8 pb-12 sm:p-14 sm:pb-20 mx-auto my-8">
         {user.token && isValidAuthor && (
           <div className="flex justify-end mb-2 gap-4">
             <a href={`/post/edit/${post._id}`}>
@@ -85,14 +93,16 @@ const SinglePost = () => {
             </button>
           </div>
         )}
-        <img src={"https://picsum.photos/id/237/800/500"} alt="cutie" />
-        <h1 className="text-3xl font-bold my-4 mt-8">{post.title}</h1>
-        <div className="text-gray-700 mb-4">
+        <h1 className="text-2xl sm:text-4xl font-bold my-4 mt-8">
+          {post.title}
+        </h1>
+        <div className="text-gray-700">
           <span className="font-semibold">By:</span>{" "}
           {post?.author?.username || "Anonymous"}
         </div>
         <div className="text-gray-600 text-sm mb-4">
-          Posted on {new Date(post.timestamp).toLocaleDateString()}
+          <span className="font-semibold">Posted:</span>{" "}
+          <TimeAgo date={post.timestamp} />
         </div>
         <p className="text-gray-800 leading-relaxed">{post.body}</p>
       </div>
