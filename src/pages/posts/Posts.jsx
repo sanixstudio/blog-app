@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card } from "../../components";
 import useFetchPosts from "../../hooks/useFetchPosts";
 import ReactPaginate from "react-paginate";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 const Posts = () => {
   const { posts, error, loading } = useFetchPosts();
@@ -9,7 +10,7 @@ const Posts = () => {
   const postsPerPage = 9;
 
   if (error) return <h1 className="text-4xl">Error</h1>;
-  if (loading) return <h1 className="text-4xl">Loading...</h1>;
+  if (loading) return <LoadingSpinner />;
 
   // Calculate the current page of posts to display
   const indexOfLastPost = (currentPage + 1) * postsPerPage;

@@ -7,6 +7,7 @@ import { useAuth } from "../../context/userContext";
 import { DeleteConfirmModal } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
 import TimeAgo from "react-timeago";
+import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner'
 
 const SinglePost = () => {
   const { user } = useAuth();
@@ -67,7 +68,7 @@ const SinglePost = () => {
     setShowModal(false);
   };
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <h1>Error: {error}</h1>;
 
   const loggedUserId = user?.user?.id;
@@ -85,7 +86,7 @@ const SinglePost = () => {
         </span>
         Back
       </button>
-      <div className="bg-white shadow-lg rounded-lg p-8 pb-12 sm:p-14 sm:pb-20 mx-auto my-8">
+      <div className="bg-white max-w-6xl shadow-lg rounded-lg p-8 pb-12 sm:p-14 sm:pb-20 mx-auto my-8">
         {user.token && isValidAuthor && (
           <div className="flex justify-end mb-2 gap-4">
             <a href={`/post/edit/${post._id}`}>

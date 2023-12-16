@@ -13,6 +13,7 @@ import {
   Dashboard,
 } from "./pages";
 import { AuthProvider } from "./context/userContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/register",
@@ -37,7 +42,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/new-post",
-    element: <NewPost />,
+    element: (
+      <ProtectedRoute>
+        <NewPost />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/post/:postId",
@@ -45,7 +54,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/post/edit/:postId",
-    element: <EditPost />,
+    element: (
+      <ProtectedRoute>
+        <EditPost />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { DashBoardTable, DeleteConfirmModal } from "../../components";
 import { FaArrowLeft } from "react-icons/fa";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -45,7 +46,7 @@ const Dashboard = () => {
   };
 
   if (error) return <h1 className="text-4xl">Error: {error.message}</h1>; // Display the error message
-  if (loading) return <h1 className="text-4xl">Loading...</h1>;
+  if (loading) return <LoadingSpinner />;
 
   const indexOfLastPost = (currentPage + 1) * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
