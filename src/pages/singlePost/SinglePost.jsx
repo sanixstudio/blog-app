@@ -7,7 +7,7 @@ import { useAuth } from "../../context/userContext";
 import { DeleteConfirmModal } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
 import TimeAgo from "react-timeago";
-import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner'
+import { LoadingSpinner } from "../../components";
 
 const SinglePost = () => {
   const { user } = useAuth();

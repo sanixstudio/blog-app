@@ -1,6 +1,5 @@
 import React from "react";
-import { Navbar } from "../components";
-import CreateNewBtn from "../components/createNewBtn/CreateNewBtn";
+import { CreateNewBtn, Navbar } from "../components";
 import { useAuth } from "../context/userContext";
 
 const Layout = ({ children }) => {

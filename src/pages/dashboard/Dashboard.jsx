@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { DashBoardTable, DeleteConfirmModal } from "../../components";
 import { FaArrowLeft } from "react-icons/fa";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "../../components";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);

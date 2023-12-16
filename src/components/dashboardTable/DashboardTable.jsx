@@ -4,12 +4,12 @@ import { FaRegEye } from "react-icons/fa";
 
 const DashboardTable = ({ currentPosts, openModal }) => {
   return (
-    <table className="min-w-full">
+    <table className="w-full">
       <thead>
         <tr className="bg-gray-200">
           <th className="py-2 px-4">Title</th>
-          <th className="py-2 px-4">Body</th>
-          <th className="py-2 px-4">Author</th>
+          {/* <th className="py-2 px-4">Body</th> */}
+          {/* <th className="py-2 px-4">Author</th> */}
           <th className="py-2 px-4">Date</th>
           <th className="py-2 px-4">Actions</th>
         </tr>
@@ -20,10 +20,10 @@ const DashboardTable = ({ currentPosts, openModal }) => {
             <td className="py-2 px-4 font-semibold truncate">
               <a href={`/post/${post._id}`}> {post.title}</a>
             </td>
-            <td className="py-2 flex-1 line-clamp-1 px-4 leading-10">
+            {/* <td className="py-2 flex-1 line-clamp-1 px-4 leading-10">
               {post.body}
-            </td>
-            <td>{post.author.username}</td>
+            </td> */}
+            {/* <td>{post.author.username}</td> */}
             <td className="py-2 px-4">
               {new Date(post.timestamp).toLocaleDateString()}
             </td>

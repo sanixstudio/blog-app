@@ -1,7 +1,10 @@
-export { default as Navbar } from "./navbar/Navbar";
-export { default as Footer } from "./footer/Footer";
-export { default as DeleteConfirmModal } from "./deleteConfirmModal/DeleteConfirmModal";
-export { default as Post } from "./post/Post";
-export { default as DashBoardTable } from "./dashboardTable/DashboardTable";
-export { default as PostEditForm } from "./postEditForm/PostEditForm";
 export { default as Card } from "./card/Card";
+export { default as CreateNewBtn } from "./createNewBtn/CreateNewBtn";
+export { default as DeleteConfirmModal } from "./deleteConfirmModal/DeleteConfirmModal";
+export { default as DashBoardTable } from "./dashboardTable/DashboardTable";
+export { default as Footer } from "./footer/Footer";
+export { default as LoadingSpinner } from "./loadingSpinner/LoadingSpinner";
+export { default as Navbar } from "./navbar/Navbar";
+export { default as Post } from "./post/Post";
+export { default as PostEditForm } from "./postEditForm/PostEditForm";
+export { default as TextEditor } from "./textEditor/TextEditor";

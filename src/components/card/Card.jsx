@@ -5,14 +5,18 @@ const Card = ({ post }) => {
   return (
     <a
       href={`/post/${post._id}`}
-      className="py-2 flex flex-col justify-between hover:scale-[1.1] transition ease-in rounded-[16px] overflow-hidden shadow-lg bg-white mb-4"
+      className=" flex flex-col justify-between border hover:shadow-2xl transition ease-in rounded-[16px] overflow-hidden shadow-lg bg-white"
     >
-      <div className="px-4 py-2">
-        {/* <img src="https://picsum.photos/id/953/400/200" alt="" className='rounded-[16px]' /> */}
-        <h2 className="text-2xl font-bold mb-3 mt-6">{post.title}</h2>
-        <p className="text-gray-700 text-base line-clamp-4">{post.body}</p>
+      {/* <img
+        src="https://picsum.photos/id/953/400/200"
+        alt=""
+        className="rounded-t-[16px]"
+      /> */}
+      <div className="p-4">
+        <h2 className="text-2xl font-bold mb-3 mt-">{post.title}</h2>
+        <p className="text-gray-700 text-base line-clamp-3">{post.body}</p>
       </div>
-      <div className="px-6 pt-4 pb-2 flex gap-8 justify-between border-t border-gray-100">
+      <div className="px-4 pt-4 pb-4 flex gap-8 justify-between items-center border-t border-gray-100">
         <div className="flex items-center">
           <img
             className="w-8 h-8 rounded-full mr-4"

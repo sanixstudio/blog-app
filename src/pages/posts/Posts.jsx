@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card } from "../../components";
 import useFetchPosts from "../../hooks/useFetchPosts";
 import ReactPaginate from "react-paginate";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "../../components";
 
 const Posts = () => {
   const { posts, error, loading } = useFetchPosts();
