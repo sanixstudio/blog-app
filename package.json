@@ -15,7 +15,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
     "react-paginate": "^8.2.0",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^6.21.0",
     "react-timeago": "^7.2.0",
     "timeago-react": "^3.0.6",
     "timeago.js": "^4.0.2"

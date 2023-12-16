@@ -6,3 +6,5 @@ dist-ssr
 package-lock.json
 yarn.lock
 tailwind.css
+.env
+.env.local

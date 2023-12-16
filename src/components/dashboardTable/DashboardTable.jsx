@@ -17,7 +17,9 @@ const DashboardTable = ({ currentPosts, openModal }) => {
       <tbody>
         {currentPosts.map((post) => (
           <tr key={post._id} className="hover:bg-gray-100">
-            <td className="py-2 px-4 font-semibold truncate">{post.title}</td>
+            <td className="py-2 px-4 font-semibold truncate">
+              <a href={`/post/${post._id}`}> {post.title}</a>
+            </td>
             <td className="py-2 flex-1 line-clamp-1 px-4 leading-10">
               {post.body}
             </td>
@@ -28,7 +30,6 @@ const DashboardTable = ({ currentPosts, openModal }) => {
             <td className="flex py-2 px-4">
               <a
                 href={`/post/${post._id}`}
-                target="_blank"
                 className="flex justify-center items-center bg-gray-400 hover:bg-gray-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
               >
                 <FaRegEye />

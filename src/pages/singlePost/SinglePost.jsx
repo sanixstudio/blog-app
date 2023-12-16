@@ -76,12 +76,15 @@ const SinglePost = () => {
 
   return (
     <Layout>
-      <a href="/" className="my-8 flex items-center gap-3">
+      <button
+        onClick={() => navigate(-1)}
+        className="my-8 flex items-center gap-3"
+      >
         <span>
           <FaArrowLeft />
         </span>
-        Back to Home
-      </a>
+        Back
+      </button>
       <div className="bg-white shadow-lg rounded-lg p-8 pb-12 sm:p-14 sm:pb-20 mx-auto my-8">
         {user.token && isValidAuthor && (
           <div className="flex justify-end mb-2 gap-4">
@@ -98,11 +101,15 @@ const SinglePost = () => {
         </h1>
         <div className="text-gray-700">
           <span className="font-semibold">By:</span>{" "}
-          {post?.author?.username || "Anonymous"}
+          <span className="text-gray-500">
+            {post?.author?.username || "Anonymous"}
+          </span>
         </div>
         <div className="text-gray-600 text-sm mb-4">
           <span className="font-semibold">Posted:</span>{" "}
-          <TimeAgo date={post.timestamp} />
+          <span className="text-gray-500">
+            <TimeAgo date={post.timestamp} />
+          </span>
         </div>
         <p className="text-gray-800 leading-relaxed">{post.body}</p>
       </div>
