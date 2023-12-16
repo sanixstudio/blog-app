@@ -1,11 +1,11 @@
-import React from 'react'
+import { Editor, EditorState } from "draft-js";
 
 const TextEditor = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
-export default TextEditor
+  return <Editor editorState={editorState} onChange={setEditorState} />;
+};
+
+export default TextEditor;

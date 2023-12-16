@@ -45,11 +45,11 @@ const Register = () => {
 
   return (
     <Layout>
-      <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 md:-mt-10 py-8 mx-auto md:min-h-screen md:py-10">
+      <section className="bg-gray-50">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-screen md:py-10">
           <a
-            href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+            href="/"
+            className="flex items-center mb-6 text-2xl font-semibold text-gray-900"
           >
             <img
               className="w-8 h-8 mr-2"

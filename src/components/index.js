@@ -7,4 +7,4 @@ export { default as LoadingSpinner } from "./loadingSpinner/LoadingSpinner";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as Post } from "./post/Post";
 export { default as PostEditForm } from "./postEditForm/PostEditForm";
-export { default as TextEditor } from "./textEditor/TextEditor";
+// export { default as TextEditor } from "./textEditor/TextEditor";

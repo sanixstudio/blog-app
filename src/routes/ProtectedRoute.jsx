@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
 
   if (user.user) {
-    return <div>{children}</div>;
+    return <>{children}</>;
   } else return navigate("/");
 };
 

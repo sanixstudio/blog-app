@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       {userProfile && <CreateNewBtn />}
-      <div className="max-w-[1440px] mx-auto">{children}</div>
+      <div className="w-full mx-auto">{children}</div>
     </>
   );
 };
