@@ -5,43 +5,7 @@ import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
-const formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-  "video",
-];
-
-const modules = {
-  toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link", "image", "video"],
-    ["clean"],
-  ],
-  clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  },
-};
+import { FORMATS, MODULES } from "../../constants";
 
 const NewPost = () => {
   const { user } = useAuth();
@@ -120,17 +84,18 @@ const NewPost = () => {
               </label>
             </div>
             <ReactQuill
-              modules={modules}
-              formats={formats}
+              // modules={MODULES}
+              // formats={FORMATS}
               theme="snow"
               value={body}
               onChange={setBody}
-              className="border bg-white h-32"
+              className="bg-white mb-8 rounded-xl border border-red-600 h-[300px]"
+              placeholder="Enter you post details"
             />
             <button
               disabled={loading}
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg mt-14"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
             >
               Create Post
             </button>

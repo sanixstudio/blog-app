@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { FORMATS, MODULES } from "../../constants";
 
 const EditPostForm = ({ post, onSubmit, loading }) => {
   const [editedPost, setEditedPost] = useState({
@@ -11,6 +14,13 @@ const EditPostForm = ({ post, onSubmit, loading }) => {
     setEditedPost({
       ...editedPost,
       [name]: value,
+    });
+  };
+
+  const handleQuillChange = (value) => {
+    setEditedPost({
+      ...editedPost,
+      body: value,
     });
   };
 
@@ -35,20 +45,21 @@ const EditPostForm = ({ post, onSubmit, loading }) => {
           required
         />
       </div>
-      <div className="mb-4">
+      <div className="mb pb-12">
         <label htmlFor="body" className="block text-sm font-medium">
           Body:
         </label>
-        <textarea
-          id="body"
-          name="body"
+        <ReactQuill
+          // modules={MODULES}
+          // formats={FORMATS}
+          theme="snow"
           value={editedPost.body}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded-lg h-[100px]"
-          required
+          onChange={handleQuillChange}
+          className="bg-white"
+          placeholder="Enter you post details"
         />
       </div>
-      <div className="flex gap-4 justify-end">
+      <div className="flex gap-4 justify-end mt-8">
         <button
           type="submit"
           className="bg-gray-400 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg"

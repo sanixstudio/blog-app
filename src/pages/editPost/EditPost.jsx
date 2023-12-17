@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../layout/layout";
 import { useAuth } from "../../context/userContext";
 import { PostEditForm } from "../../components";
+import { Toaster, toast } from "react-hot-toast";
 
 const EditPost = () => {
   const { user } = useAuth();
@@ -42,8 +43,10 @@ const EditPost = () => {
       });
 
       if (response.ok) {
-        // TODO: Post updated successfully, Toast
-        navigate(-1);
+        toast.success("Updated successfully");
+        setTimeout(() => {
+          navigate(-1);
+        }, 1000);
       } else {
         console.error("Update request failed with status:", response.status);
       }
@@ -61,6 +64,7 @@ const EditPost = () => {
 
   return (
     <Layout>
+      <Toaster />
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto my-8">
         <h1 className="text-3xl font-bold mb-2">Edit Post</h1>
         <PostEditForm loading={loading} post={post} onSubmit={handleUpdate} />
