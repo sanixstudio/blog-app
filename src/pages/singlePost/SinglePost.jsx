@@ -4,7 +4,7 @@ import Layout from "../../layout/layout";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useAuth } from "../../context/userContext";
-import { DeleteConfirmModal } from "../../components";
+import { DeleteConfirmModal, ParsedHtml } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
 import TimeAgo from "react-timeago";
 import { LoadingSpinner } from "../../components";
@@ -112,7 +112,7 @@ const SinglePost = () => {
             <TimeAgo date={post.timestamp} />
           </span>
         </div>
-        <p className="text-gray-800 leading-relaxed">{post.body}</p>
+        <ParsedHtml htmlContent={post.body} />
       </div>
       <DeleteConfirmModal
         show={showModal}

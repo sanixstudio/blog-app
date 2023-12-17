@@ -3,6 +3,45 @@ import { useAuth } from "../../context/userContext";
 import toast, { Toaster } from "react-hot-toast";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+];
+
+const modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link", "image", "video"],
+    ["clean"],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
 
 const NewPost = () => {
   const { user } = useAuth();
@@ -43,7 +82,7 @@ const NewPost = () => {
         // Reset the form fields
         setTitle("");
         setBody("");
-        toast.success("Post created successfuly, redirecting...");
+        toast.success("Post created successfully, redirecting...");
         setTimeout(() => navigate("/"), 1000);
       } else {
         throw new Error("Failed to create a new post.");
@@ -79,23 +118,22 @@ const NewPost = () => {
               <label htmlFor="body" className="block text-sm font-medium">
                 Body:
               </label>
-              <textarea
-                id="body"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                className="w-full p-2 border rounded-lg h-[100px]"
-                required
-              />
             </div>
-            <div>
-              <button
-                disabled={loading}
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
-              >
-                Create Post
-              </button>
-            </div>
+            <ReactQuill
+              modules={modules}
+              formats={formats}
+              theme="snow"
+              value={body}
+              onChange={setBody}
+              className="border bg-white h-32"
+            />
+            <button
+              disabled={loading}
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg mt-14"
+            >
+              Create Post
+            </button>
           </form>
         </div>
       </div>
