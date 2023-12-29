@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "react-quill/dist/quill.snow.css";
 import MarkDownEditor from "../markDownEditor/MarkDownEditor";
 import { useNavigate } from "react-router-dom";
 

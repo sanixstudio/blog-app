@@ -7,11 +7,11 @@ const Layout = ({ children }) => {
   const userProfile = user.user;
 
   return (
-    <>
+    <div>
       <Navbar />
       {userProfile && <CreateNewBtn />}
       <div className="w-full mx-auto">{children}</div>
-    </>
+    </div>
   );
 };
 

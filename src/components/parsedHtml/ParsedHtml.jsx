@@ -1,5 +1,4 @@
 import React from "react";
-import DOMPurify from "dompurify";
 
 const ParsedHtml = ({ htmlContent }) => {
   return (

@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/userContext";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
+import { Button } from "@radix-ui/themes";
+
+const MobileMenu = ({ isOpen, closeMenu }) => {
+  if (isOpen) {
+    return (
+      <div className="fixed top-0 left-0 flex w-1/2 h-screen justify-center items-center bg-black/80 text-white">
+        <div className="relative w-full h-screen flex flex-col justify-center items-center">
+          <Button onClick={closeMenu} className="absolute top-2 right-4">
+            <span className="text-4xl">x</span>
+          </Button>
+          <span>LOGO</span>
+          <nav>
+            <ul>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/login">Login</a>
+              </li>
+              <li>
+                <a href="/register">Register</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    );
+  } else return null;
+};
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { user, userLogout } = useAuth();
   const capitalizeFirstLetter = (string) =>
     string
@@ -13,8 +43,16 @@ const Navbar = () => {
 
   const userProfile = user.user;
 
+  const openMenu = () => {
+    setIsOpen(true);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <nav className="">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <a href="/" className="flex items-center">
           <img
@@ -29,6 +67,7 @@ const Navbar = () => {
         <button
           data-collapse-toggle="navbar-default"
           type="button"
+          onClick={openMenu}
           className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-default"
           aria-expanded="false"
@@ -120,6 +159,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      <MobileMenu isOpen={isOpen} closeMenu={closeMenu} />
     </nav>
   );
 };

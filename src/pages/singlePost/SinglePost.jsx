@@ -8,6 +8,7 @@ import { DeleteConfirmModal, LoadingSpinner } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
 import TimeAgo from "react-timeago";
 import MDEditor from "@uiw/react-md-editor";
+import { NO_IMAGE } from "../../constants";
 
 const SinglePost = () => {
   const { user } = useAuth();
@@ -114,6 +115,9 @@ const SinglePost = () => {
           <span className="text-gray-500">
             <TimeAgo date={post.timestamp} />
           </span>
+        </div>
+        <div className="w-full flex justify-center mb-4">
+          <img src={post?.image?.url || NO_IMAGE} alt="post image" />
         </div>
         <MDEditor.Markdown
           source={post.body}

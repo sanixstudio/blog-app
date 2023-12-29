@@ -1,12 +1,12 @@
 import React from "react";
-import Posts from "./pages/posts/Posts";
 import Layout from "./layout/layout";
+import Landing from "./pages/landing/Landing";
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-[#F9FCFF]">
       <Layout>
-        <Posts />
+        <Landing />
       </Layout>
     </div>
   );

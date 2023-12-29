@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
@@ -11,6 +13,7 @@ import {
   SinglePost,
   EditPost,
   Dashboard,
+  Profile,
 } from "./pages";
 import { AuthProvider } from "./context/userContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -69,13 +72,23 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
     <RouterProvider router={router}>
-      <App />
+      <Theme>
+        <App />
+      </Theme>
     </RouterProvider>
   </AuthProvider>
 );

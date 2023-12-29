@@ -1,6 +1,6 @@
 import React from "react";
 import TimeAgo from "react-timeago";
-import MDEditor from "@uiw/react-md-editor";
+import { NO_IMAGE } from "../../constants";
 
 const Card = ({ post }) => {
   return (
@@ -9,8 +9,17 @@ const Card = ({ post }) => {
       className="flex flex-col justify-between border hover:shadow-2xl hover:border-gray-400 transition ease-in rounded-[16px] overflow-hidden shadow-lg bg-white"
     >
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-3 mt-">{post.title}</h2>
-        <div className="text-gray-700 text-base line-clamp-3">
+        {post.image && (
+          <div>
+            <img
+              src={post.image.url ? post.image.url : NO_IMAGE}
+              alt=""
+              className="max-h-[200px] w-full object-cover rounded-t-lg"
+            />
+          </div>
+        )}
+        <h2 className="text-2xl font-bold mb-3 mt-4">{post.title}</h2>
+        {/* <div className="text-gray-700 text-base line-clamp-3">
           <MDEditor.Markdown
             source={post.body}
             style={{
@@ -18,7 +27,7 @@ const Card = ({ post }) => {
               background: window.sys,
             }}
           />
-        </div>
+        </div> */}
       </div>
       <div className="px-4 pt-4 pb-4 flex gap-8 justify-between items-center border-t border-gray-100">
         <div className="flex items-center">

@@ -6,3 +6,5 @@ export { default as Page404 } from "./page404/page404";
 export { default as SinglePost } from "./singlePost/SinglePost";
 export { default as EditPost } from "./editPost/EditPost";
 export { default as Posts } from "./posts/Posts";
+export { default as Profile } from "./profile/Profile";
+export { default as Landing } from "./landing/Landing";

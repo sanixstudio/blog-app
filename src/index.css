@@ -3,10 +3,28 @@
 @tailwind utilities;
 
 .disabled {
-    pointer-events: none;
-    color: #aaa;
+  pointer-events: none;
+  color: #aaa;
 }
 
 .active {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+p {
+  color: #183b56;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 177.778% */
+}
+
+h1 {
+  color: #183b56;
+  font-family: Roboto;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 68px; /* 121.429% */
+  letter-spacing: 0.2px;
 }

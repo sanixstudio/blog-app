@@ -10,6 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null); // State to store the selected image file
 
   const navigate = useNavigate();
   const { userLogin } = useAuth();
@@ -18,31 +19,42 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (password !== confirmPassword) alert("Password not match");
-    else {
-      try {
-        const response = await fetch(REGISTER_PATH, {
-          method: "POST",
-          body: JSON.stringify({ username, password }),
-          headers: { "Content-Type": "application/json" },
-        });
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      setLoading(false);
+      return;
+    }
 
-        if (response.status === 201) {
-          const data = await response.json();
-          userLogin(data.token, data.user);
-          toast.success("Registered successfully!");
-          setTimeout(() => navigate("/"), 1500);
-        } else {
-          toast.error("Failed");
-        }
-      } catch (error) {
-        toast.error(errorMessage);
-      } finally {
-        setLoading(false);
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("image", image); // Add the image file to the formData
+
+    try {
+      const response = await fetch(REGISTER_PATH, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.status === 201) {
+        const data = await response.json();
+        userLogin(data.token, data.user);
+        toast.success("Registered successfully!");
+        setTimeout(() => navigate("/"), 1500);
+      } else {
+        toast.error("Failed to register");
       }
+    } catch (error) {
+      toast.error("An error occurred while registering");
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
+  };
   return (
     <Layout>
       <section className="bg-gray-50">
@@ -116,6 +128,22 @@ const Register = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                     onChange={(e) => setConfirmPassword(e.target.value.trim())}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="image"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Profile Photo
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    accept="image/*" // Allow only image files
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    onChange={handleImageChange}
                   />
                 </div>
                 <button

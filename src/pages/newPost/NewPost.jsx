@@ -3,7 +3,6 @@ import { useAuth } from "../../context/userContext";
 import toast, { Toaster } from "react-hot-toast";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
-import "react-quill/dist/quill.snow.css";
 import { MarkDownEditor } from "../../components";
 
 const NewPost = () => {
@@ -34,6 +33,9 @@ const NewPost = () => {
     formData.append("title", title);
     formData.append("body", body);
     formData.append("userId", user?.user.id);
+    if (image) {
+      formData.append("image", image); // Add the image to the FormData
+    }
 
     try {
       setLoading(true);
@@ -49,6 +51,7 @@ const NewPost = () => {
         // Reset the form fields
         setTitle("");
         setBody("");
+        setImage(null); // Clear the selected image
         toast.success("Post created successfully, redirecting...");
         setTimeout(() => navigate("/"), 1000);
       } else {
@@ -88,6 +91,18 @@ const NewPost = () => {
               </label>
             </div>
             <MarkDownEditor value={body} setValue={setBody} />
+            <div className="mb-4">
+              <label htmlFor="image" className="block text-sm font-medium">
+                Image:
+              </label>
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full p-2 border rounded-lg"
+              />
+            </div>
             <div className="my-4 mt-10"></div>
             <button
               disabled={loading}
