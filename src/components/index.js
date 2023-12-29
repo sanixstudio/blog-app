@@ -8,4 +8,5 @@ export { default as Navbar } from "./navbar/Navbar";
 export { default as ParsedHtml } from "./parsedHtml/ParsedHtml";
 export { default as Post } from "./post/Post";
 export { default as PostEditForm } from "./postEditForm/PostEditForm";
+export { default as MarkDownEditor } from "./markDownEditor/MarkDownEditor";
 // export { default as TextEditor } from "./textEditor/TextEditor";

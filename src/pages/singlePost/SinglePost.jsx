@@ -7,7 +7,7 @@ import { useAuth } from "../../context/userContext";
 import { DeleteConfirmModal, LoadingSpinner } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
 import TimeAgo from "react-timeago";
-import parse from "html-react-parser";
+import MDEditor from "@uiw/react-md-editor";
 
 const SinglePost = () => {
   const { user } = useAuth();
@@ -19,6 +19,9 @@ const SinglePost = () => {
   const navigate = useNavigate();
 
   const postId = pathname.split("/").pop();
+
+  const el = window.matchMedia("(prefers-color-scheme: dark)");
+  console.log(el);
 
   const fetchPost = async () => {
     try {
@@ -112,7 +115,13 @@ const SinglePost = () => {
             <TimeAgo date={post.timestamp} />
           </span>
         </div>
-        <div>{typeof post.body === "string" ? parse(post.body) : null}</div>
+        <MDEditor.Markdown
+          source={post.body}
+          style={{
+            padding: "2em",
+            background: window.sys,
+          }}
+        />
       </div>
       <DeleteConfirmModal
         show={showModal}

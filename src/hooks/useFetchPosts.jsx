@@ -8,7 +8,10 @@ const useFetchPosts = () => {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:4000/api/posts");
+      const res = await fetch("http://localhost:4000/api/posts"); // Replace with your server URL
+      if (!res.ok) {
+        throw new Error("Failed to fetch posts");
+      }
       const data = await res.json();
       setPosts(data);
     } catch (err) {

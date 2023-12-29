@@ -1,6 +1,6 @@
 import React from "react";
 import TimeAgo from "react-timeago";
-import parse from "html-react-parser";
+import MDEditor from "@uiw/react-md-editor";
 
 const Card = ({ post }) => {
   return (
@@ -11,16 +11,26 @@ const Card = ({ post }) => {
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-3 mt-">{post.title}</h2>
         <div className="text-gray-700 text-base line-clamp-3">
-          {parse(post.body)}
+          <MDEditor.Markdown
+            source={post.body}
+            style={{
+              padding: "2em",
+              background: window.sys,
+            }}
+          />
         </div>
       </div>
       <div className="px-4 pt-4 pb-4 flex gap-8 justify-between items-center border-t border-gray-100">
         <div className="flex items-center">
-          <img
-            className="w-8 h-8 rounded-full mr-4"
-            src="https://picsum.photos/id/737/200/300"
-            alt="Avatar of Writer"
-          />
+          {post.image && post.image.img && post.image.img.data ? (
+            <img
+              className="w-8 h-8 rounded-full mr-4"
+              src={""}
+              alt="Author Avatar"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-full mr-4 bg-gray-300"></div>
+          )}
           <div className="text-sm">
             <span className="text-black leading-none font-bold">
               {post.author.username}

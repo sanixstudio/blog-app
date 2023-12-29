@@ -8,14 +8,15 @@ const Posts = () => {
   const { posts, error, loading } = useFetchPosts();
   const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 9;
-
   if (error) return <h1 className="text-4xl">Error</h1>;
   if (loading) return <LoadingSpinner />;
 
   // Calculate the current page of posts to display
   const indexOfLastPost = (currentPage + 1) * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.reverse().slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = [...posts]
+    .reverse()
+    .slice(indexOfFirstPost, indexOfLastPost);
 
   const handlePageClick = (data) => {
     const selectedPage = data.selected;

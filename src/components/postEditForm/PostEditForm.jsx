@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { FORMATS, MODULES } from "../../constants";
+import MarkDownEditor from "../markDownEditor/MarkDownEditor";
+import { useNavigate } from "react-router-dom";
 
 const EditPostForm = ({ post, onSubmit, loading }) => {
+  const navigate = useNavigate();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     body: post.body,
@@ -17,7 +18,7 @@ const EditPostForm = ({ post, onSubmit, loading }) => {
     });
   };
 
-  const handleQuillChange = (value) => {
+  const handleChange = (value) => {
     setEditedPost({
       ...editedPost,
       body: value,
@@ -49,20 +50,13 @@ const EditPostForm = ({ post, onSubmit, loading }) => {
         <label htmlFor="body" className="block text-sm font-medium">
           Body:
         </label>
-        <ReactQuill
-          // modules={MODULES}
-          // formats={FORMATS}
-          theme="snow"
-          value={editedPost.body}
-          onChange={handleQuillChange}
-          className="bg-white"
-          placeholder="Enter you post details"
-        />
+        <MarkDownEditor value={editedPost.body} setValue={handleChange} />
       </div>
       <div className="flex gap-4 justify-end mt-8">
         <button
           type="submit"
           className="bg-gray-400 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg"
+          onClick={() => navigate(-1)}
         >
           Cancel
         </button>

@@ -65,7 +65,7 @@ const EditPost = () => {
   return (
     <Layout>
       <Toaster />
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto my-8">
+      <div className="bg-white shadow-lg rounded-lg p-6 max-w-[1440px] mx-auto my-8">
         <h1 className="text-3xl font-bold mb-2">Edit Post</h1>
         <PostEditForm loading={loading} post={post} onSubmit={handleUpdate} />
       </div>

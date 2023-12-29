@@ -3,9 +3,8 @@ import { useAuth } from "../../context/userContext";
 import toast, { Toaster } from "react-hot-toast";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { FORMATS, MODULES } from "../../constants";
+import { MarkDownEditor } from "../../components";
 
 const NewPost = () => {
   const { user } = useAuth();
@@ -13,33 +12,37 @@ const NewPost = () => {
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null); // State to store the selected image file
   const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title || !body) {
-      setError("All fields are required");
+      setError("Both title and body fields are required.");
       return;
     }
 
     setError("");
 
-    const newPost = {
-      title,
-      body,
-      userId: user?.user.id,
-    };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("body", body);
+    formData.append("userId", user?.user.id);
 
     try {
       setLoading(true);
       const res = await fetch("http://localhost:4000/api/posts", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           authorization: user.token,
         },
-        body: JSON.stringify(newPost),
+        body: formData,
       });
 
       if (res.ok) {
@@ -49,6 +52,7 @@ const NewPost = () => {
         toast.success("Post created successfully, redirecting...");
         setTimeout(() => navigate("/"), 1000);
       } else {
+        toast.error("Failed to create a new post.");
         throw new Error("Failed to create a new post.");
       }
     } catch (error) {
@@ -61,7 +65,7 @@ const NewPost = () => {
   return (
     <Layout>
       <div className="flex w-full min-h-screen justify-center items-center -mt-20">
-        <div className="bg-gray-100 p-4 rounded-lg shadow-md md:w-[500px]">
+        <div className="bg-gray-100 p-4 rounded-lg shadow-md md:w-[900px]">
           <h2 className="text-xl font-semibold mb-4">Create a New Post</h2>
           {error && <p className="text-red-600 mb-4">{error}</p>}
           <form onSubmit={handleSubmit}>
@@ -83,15 +87,8 @@ const NewPost = () => {
                 Body:
               </label>
             </div>
-            <ReactQuill
-              // modules={MODULES}
-              // formats={FORMATS}
-              theme="snow"
-              value={body}
-              onChange={setBody}
-              className="bg-white mb-8 rounded-xl border border-red-600 h-[300px]"
-              placeholder="Enter you post details"
-            />
+            <MarkDownEditor value={body} setValue={setBody} />
+            <div className="my-4 mt-10"></div>
             <button
               disabled={loading}
               type="submit"
