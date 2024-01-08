@@ -4,6 +4,7 @@ import Layout from "../../layout/layout";
 import { useAuth } from "../../context/userContext";
 import { PostEditForm } from "../../components";
 import { Toaster, toast } from "react-hot-toast";
+import { BASE_ROUTE } from "../../constants";
 
 const EditPost = () => {
   const { user } = useAuth();
@@ -20,7 +21,7 @@ const EditPost = () => {
   const fetchPost = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:4000/api/posts/${postId}`);
+      const res = await fetch(`${BASE_ROUTE}/api/posts/${postId}`);
       const data = await res.json();
       setPost(data);
     } catch (error) {
@@ -32,7 +33,7 @@ const EditPost = () => {
 
   const handleUpdate = async (editedPostData) => {
     try {
-      const url = `http://localhost:4000/api/posts/${postId}`;
+      const url = `${BASE_ROUTE}/api/posts/${postId}`;
       const response = await fetch(url, {
         method: "PUT", // Use the appropriate HTTP method for updating
         headers: {

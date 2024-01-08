@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import { DashBoardTable, DeleteConfirmModal } from "../../components";
 import { FaArrowLeft } from "react-icons/fa";
 import { LoadingSpinner } from "../../components";
+import { BASE_ROUTE } from "../../constants";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -28,7 +29,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `http://localhost:4000/api/posts/user-posts/${user?.user?.id}`,
+        `${BASE_ROUTE}/api/posts/user-posts/${user?.user?.id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -61,7 +62,7 @@ const Dashboard = () => {
     closeModal();
 
     try {
-      const url = `http://localhost:4000/api/posts/${postId}`;
+      const url = `${BASE_ROUTE}/api/posts/${postId}`;
       const response = await fetch(url, {
         method: "DELETE",
         headers: {

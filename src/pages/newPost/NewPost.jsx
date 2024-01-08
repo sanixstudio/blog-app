@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
 import { MarkDownEditor } from "../../components";
+import { BASE_ROUTE } from "../../constants";
 
 const NewPost = () => {
   const { user } = useAuth();
@@ -39,7 +40,7 @@ const NewPost = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:4000/api/posts", {
+      const res = await fetch(`${BASE_ROUTE}/api/posts`, {
         method: "POST",
         headers: {
           authorization: user.token,

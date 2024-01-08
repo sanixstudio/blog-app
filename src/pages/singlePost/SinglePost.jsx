@@ -8,7 +8,7 @@ import { DeleteConfirmModal, LoadingSpinner } from "../../components";
 import toast, { Toaster } from "react-hot-toast";
 import TimeAgo from "react-timeago";
 import MDEditor from "@uiw/react-md-editor";
-import { NO_IMAGE } from "../../constants";
+import { BASE_ROUTE, NO_IMAGE } from "../../constants";
 
 const SinglePost = () => {
   const { user } = useAuth();
@@ -27,7 +27,7 @@ const SinglePost = () => {
   const fetchPost = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:4000/api/posts/${postId}`);
+      const res = await fetch(`${BASE_ROUTE}/api/posts/${postId}`);
       const data = await res.json();
       setPost(data);
     } catch (error) {
@@ -41,7 +41,7 @@ const SinglePost = () => {
     closeModal();
 
     try {
-      const url = `http://localhost:4000/api/posts/${postId}`;
+      const url = `${BASE_ROUTE}/api/posts/${postId}`;
       const response = await fetch(url, {
         method: "DELETE",
         headers: {

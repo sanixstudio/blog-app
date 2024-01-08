@@ -1,8 +1,10 @@
+import { BASE_ROUTE } from "../constants";
+
 export const handleDelete = async (postId, pageToNavigate) => {
   closeModal();
 
   try {
-    const url = `http://localhost:4000/api/posts/${postId}`;
+    const url = `${BASE_ROUTE}/api/posts/${postId}`;
     const response = await fetch(url, {
       method: "DELETE",
       headers: {

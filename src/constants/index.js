@@ -1,6 +1,6 @@
 import img from "../assets/images/no_photo.jpg";
 
-export const BASE_ROUTE = "http://localhost:4000";
+export const BASE_ROUTE = import.meta.env.VITE_BASE_URL;
 export const LOGIN_PATH = `${BASE_ROUTE}/api/login`;
 export const REGISTER_PATH = `${BASE_ROUTE}/api/register`;
 
