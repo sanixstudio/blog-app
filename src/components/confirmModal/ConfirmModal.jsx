@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteConfirmModal = ({ show, onClose, onDelete }) => {
+const ConfirmModal = ({ show, onClose, onDelete }) => {
   if (!show) {
     return null;
   }
@@ -28,4 +28,4 @@ const DeleteConfirmModal = ({ show, onClose, onDelete }) => {
   );
 };
 
-export default DeleteConfirmModal;
+export default ConfirmModal;

@@ -1,6 +1,6 @@
 export { default as Card } from "./card/Card";
 export { default as CreateNewBtn } from "./createNewBtn/CreateNewBtn";
-export { default as DeleteConfirmModal } from "./deleteConfirmModal/DeleteConfirmModal";
+export { default as ConfirmModal } from "./confirmModal/ConfirmModal";
 export { default as DashBoardTable } from "./dashboardTable/DashboardTable";
 export { default as Footer } from "./footer/Footer";
 export { default as LoadingSpinner } from "./loadingSpinner/LoadingSpinner";

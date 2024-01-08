@@ -3,7 +3,7 @@ import { useAuth } from "../../context/userContext";
 import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import { DashBoardTable, DeleteConfirmModal } from "../../components";
+import { DashBoardTable, ConfirmModal } from "../../components";
 import { FaArrowLeft } from "react-icons/fa";
 import { LoadingSpinner } from "../../components";
 import { BASE_ROUTE } from "../../constants";
@@ -118,7 +118,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <DeleteConfirmModal
+      <ConfirmModal
         show={showModal}
         onClose={closeModal}
         onDelete={handleDelete}
