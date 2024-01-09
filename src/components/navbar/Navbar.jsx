@@ -6,6 +6,8 @@ import { FiLogOut } from "react-icons/fi";
 import { Button } from "@radix-ui/themes";
 import { useLocation } from "react-router-dom";
 
+import SmashLogo from "../../assets/images/smash_logo.png";
+
 const MobileMenu = ({ isOpen, closeMenu }) => {
   if (isOpen) {
     return (
@@ -59,12 +61,12 @@ const Navbar = () => {
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <a href="/" className="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-6 mr-3 sm:h-9"
+            src={SmashLogo}
+            className="mr-3 w-full max-w-[72px]"
             alt="blog-app logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Smash Blog
+            Blog
           </span>
         </a>
         <button
