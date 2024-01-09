@@ -44,5 +44,6 @@
   "bugs": {
     "url": "https://github.com/sanixstudio/blog-app/issues"
   },
-  "homepage": "https://github.com/sanixstudio/blog-app#readme"
+  "homepage": "https://github.com/sanixstudio/blog-app#readme",
+  "proxy": "https://blog-app-backend-production-14d8.up.railway.app"
 }
