@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MarkDownEditor from "../markDownEditor/MarkDownEditor";
 import { useNavigate } from "react-router-dom";
+import MarkdownEditor from "@uiw/react-markdown-editor";
 
 const EditPostForm = ({ post, onSubmit, loading }) => {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const EditPostForm = ({ post, onSubmit, loading }) => {
         <label htmlFor="body" className="block text-sm font-medium">
           Body:
         </label>
-        <MarkDownEditor value={editedPost.body} setValue={handleChange} />
+        <MarkdownEditor height="250px" value={editedPost?.body} onChange={handleChange} />
       </div>
       <div className="flex gap-4 justify-end mt-8">
         <button

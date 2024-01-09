@@ -1,6 +1,7 @@
 import React from "react";
 import useFetchLastPost from "../../hooks/useFetchLastPost";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import MDEditor from "@uiw/react-md-editor";
 
 const LandingHero = () => {
   const { loading, error, lastPost } = useFetchLastPost();
@@ -20,7 +21,15 @@ const LandingHero = () => {
       </div>
       <div className="flex-1  order-2 lg:order-1 text-center lg:text-left">
         <h1 className="text-4xl md:5xl lg:text-6xl">{lastPost?.title}</h1>
-        <p className=" my-8 line-clamp-4">{lastPost?.body}</p>
+        <MDEditor.Markdown
+          source={lastPost?.body}
+          components={<button>Submit</button>}
+          style={{
+            padding: "2em",
+            background: "transparent",
+          }}
+          className="line-clamp-4"
+        />
       </div>
     </div>
   );

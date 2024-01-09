@@ -30,12 +30,7 @@ Start the server
 
 `npm run dev` or `yarn dev`
 
-Now customize everything as your needs.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-## Support
-
-Leave a star ⭐ if it helped you. Thank you💖
+[![typescript](https://img.shields.io/badge/typescript-555?style=for-the-badge&color=2F73BF&logo=TypeScript&logoColor=white)](https://www.typescriptlang.org/)
+[![html](https://img.shields.io/badge/html-555?style=for-the-badge&color=DC4A25&logo=HTML5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics/)
+[![css](https://img.shields.io/badge/css-555?style=for-the-badge&color=2662E9&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![nextjs](https://img.shields.io/badge/next.js-555?style=for-the-badge&color=000&logo=Next.js&logoColor=white)](https://nextjs.org/)

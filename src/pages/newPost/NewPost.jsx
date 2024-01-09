@@ -5,6 +5,7 @@ import Layout from "../../layout/layout";
 import { useNavigate } from "react-router-dom";
 import { MarkDownEditor } from "../../components";
 import { BASE_ROUTE } from "../../constants";
+import MarkdownEditor from "@uiw/react-markdown-editor";
 
 const NewPost = () => {
   const { user } = useAuth();
@@ -91,7 +92,8 @@ const NewPost = () => {
                 Body:
               </label>
             </div>
-            <MarkDownEditor value={body} setValue={setBody}  />
+            <MarkdownEditor height="200px" value={body} onChange={setBody} />
+
             <div className="mb-4">
               <label htmlFor="image" className="block text-sm font-medium">
                 Image:
