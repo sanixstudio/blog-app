@@ -5,6 +5,7 @@ import { useAuth } from "../../context/userContext";
 import { PostEditForm } from "../../components";
 import { Toaster, toast } from "react-hot-toast";
 import { BASE_ROUTE } from "../../constants";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EditPost = () => {
   const { user } = useAuth();
@@ -67,6 +68,15 @@ const EditPost = () => {
     <Layout>
       <Toaster />
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-[1440px] mx-auto my-8">
+        <button
+          onClick={() => navigate(-1)}
+          className="my-8 flex items-center gap-3"
+        >
+          <span>
+            <FaArrowLeft />
+          </span>
+          Back
+        </button>
         <h1 className="text-3xl font-bold mb-2">Edit Post</h1>
         <PostEditForm loading={loading} post={post} onSubmit={handleUpdate} />
       </div>

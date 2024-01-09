@@ -89,23 +89,23 @@ const Dashboard = () => {
     setShowModal(false);
   };
 
+  console.log(user.user)
+
   return (
     <Layout>
-      <button
-        onClick={() => navigate(-1)}
-        className="my-8 flex items-center gap-3"
-      >
-        <span>
-          <FaArrowLeft />
-        </span>
-        Back
-      </button>
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-[1400px] mx-auto my-8">
-        <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-10 flex items-center gap-3"
+        >
+          <span>
+            <FaArrowLeft />
+          </span>
+          Back
+        </button>
+        <h1 className="text-3xl font-bold mb-8 capitalize">{user?.user.name} posts</h1>
         {/* Section: List of Posts */}
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-2">My Posts</h2>
           <DashBoardTable currentPosts={currentPosts} openModal={openModal} />
           <ReactPaginate
             previousLabel={"Previous"}

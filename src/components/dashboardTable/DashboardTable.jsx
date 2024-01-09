@@ -1,50 +1,56 @@
+import { Table } from "@radix-ui/themes";
 import React from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 
 const DashboardTable = ({ currentPosts, openModal }) => {
   return (
-    <table className="w-full">
-      <thead>
-        <tr className="bg-gray-200">
-          <th className="py-2 px-4">Title</th>
-          <th className="py-2 px-4">Date</th>
-          <th className="py-2 px-4">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Table.Root>
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell>Action</Table.ColumnHeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
         {currentPosts.map((post) => (
-          <tr key={post._id} className="hover:bg-gray-100">
-            <td className="py-2 px-4 font-semibold truncate">
-              <a href={`/post/${post._id}`}> {post.title}</a>
-            </td>
-            <td className="py-2 px-4">
+          <Table.Row key={post._id}>
+            <Table.Cell>
+              <a href={`/post/${post._id}`}>{post.title}</a>
+            </Table.Cell>
+            <Table.Cell>
               {new Date(post.timestamp).toLocaleDateString()}
-            </td>
-            <td className="flex py-2 px-4">
-              <a
-                href={`/post/${post._id}`}
-                className="flex justify-center items-center bg-gray-400 hover:bg-gray-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
-              >
-                <FaRegEye />
-              </a>
-              <a
-                href={`/post/edit/${post._id}`}
-                className="flex justify-center items-center bg-blue-400 hover:bg-blue-600 text-white font-medium py-1 px-2 rounded-lg mr-2"
-              >
-                <AiOutlineEdit />
-              </a>
+            </Table.Cell>
+            <Table.Cell className="flex">
+              <button>
+                <a
+                  href={`/post/${post._id}`}
+                  className="flex justify-center items-center  hover:bg-gray-600/20 text-white font-medium py-1 px-2 rounded-lg mr-2"
+                >
+                  <FaRegEye color="gray" />
+                </a>
+              </button>
+              <button>
+                {" "}
+                <a
+                  href={`/post/edit/${post._id}`}
+                  className="flex justify-center items-center   hover:bg-blue-600/20 text-white font-medium py-1 px-2 rounded-lg mr-2"
+                >
+                  <AiOutlineEdit color="blue" />
+                </a>
+              </button>
               <button
                 onClick={openModal}
-                className="flex justify-center items-center bg-red-400 hover:bg-red-600 text-white font-medium py-1 px-2 rounded-lg"
+                className="flex justify-center items-center hover:bg-red-600/20 text-white font-medium py-1 px-2 rounded-lg"
               >
-                <AiOutlineDelete size={24} color="white" />
+                <AiOutlineDelete size={24} color="red" />
               </button>
-            </td>
-          </tr>
+            </Table.Cell>
+          </Table.Row>
         ))}
-      </tbody>
-    </table>
+      </Table.Body>
+    </Table.Root>
   );
 };
 

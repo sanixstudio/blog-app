@@ -80,16 +80,16 @@ const SinglePost = () => {
 
   return (
     <Layout>
-      <button
-        onClick={() => navigate(-1)}
-        className="my-8 flex items-center gap-3"
-      >
-        <span>
-          <FaArrowLeft />
-        </span>
-        Back
-      </button>
       <div className="bg-white max-w-6xl shadow-lg rounded-lg p-8 pb-12 sm:p-14 sm:pb-20 mx-auto my-8">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-8 flex items-center gap-3"
+        >
+          <span>
+            <FaArrowLeft />
+          </span>
+          Back
+        </button>
         {user.token && isValidAuthor && (
           <div className="flex justify-end mb-2 gap-4">
             <a href={`/post/edit/${post._id}`}>
