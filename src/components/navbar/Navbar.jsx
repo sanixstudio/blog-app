@@ -4,6 +4,7 @@ import { BiSolidUserCircle } from "react-icons/bi";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import { Button } from "@radix-ui/themes";
+import { useLocation } from "react-router-dom";
 
 const MobileMenu = ({ isOpen, closeMenu }) => {
   if (isOpen) {
@@ -34,6 +35,7 @@ const MobileMenu = ({ isOpen, closeMenu }) => {
 };
 
 const Navbar = () => {
+  const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const { user, userLogout } = useAuth();
   const capitalizeFirstLetter = (string) =>
@@ -41,6 +43,7 @@ const Navbar = () => {
       ? string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
       : "";
 
+  const isNewPost = pathname === "/new-post";
   const userProfile = user.user;
 
   const openMenu = () => {
@@ -52,7 +55,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="">
+    <nav className="bg-slate-900 py-2">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <a href="/" className="flex items-center">
           <img
@@ -60,8 +63,8 @@ const Navbar = () => {
             className="h-6 mr-3 sm:h-9"
             alt="blog-app logo"
           />
-          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            Adi-Blog
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            Smash Blog
           </span>
         </a>
         <button
@@ -97,13 +100,15 @@ const Navbar = () => {
               <span className="text-white font-bold text-2xl mr-4">
                 {capitalizeFirstLetter(userProfile.name)}
               </span>
-              <a
-                href="/new-post"
-                className="text-white flex justify-center items-center gap-2 px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 duration-300"
-              >
-                <BsFillPlusCircleFill />
-                <span>New Post</span>
-              </a>
+              {!isNewPost && (
+                <a
+                  href="/new-post"
+                  className="text-white flex justify-center items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 duration-300"
+                >
+                  <BsFillPlusCircleFill />
+                  <span>New Post</span>
+                </a>
+              )}
             </div>
           )}
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
