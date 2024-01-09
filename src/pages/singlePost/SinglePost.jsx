@@ -22,7 +22,6 @@ const SinglePost = () => {
   const postId = pathname.split("/").pop();
 
   const el = window.matchMedia("(prefers-color-scheme: dark)");
-  console.log(el);
 
   const fetchPost = async () => {
     try {
@@ -123,7 +122,7 @@ const SinglePost = () => {
           source={post.body}
           style={{
             padding: "2em",
-            background: '#fff',
+            background: "#fff",
           }}
         />
       </div>
