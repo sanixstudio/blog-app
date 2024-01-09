@@ -11,6 +11,7 @@ function MarkDownEditor({ value, setValue }) {
       <MDEditor
         value={value}
         onChange={setValue}
+        slot="MarkDownEditor.jsx"
         previewOptions={{
           rehypePlugins: [[rehypeSanitize]],
         }}

@@ -46,7 +46,7 @@ const Dashboard = () => {
     }
   };
 
-  if (error) return <h1 className="text-4xl">Error: {error.message}</h1>; // Display the error message
+  if (error) return <h1 className="text-4xl">Error: {error.message}</h1>;
   if (loading) return <LoadingSpinner />;
 
   const indexOfLastPost = (currentPage + 1) * postsPerPage;

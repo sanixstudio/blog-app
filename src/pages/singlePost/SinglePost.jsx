@@ -123,7 +123,7 @@ const SinglePost = () => {
           source={post.body}
           style={{
             padding: "2em",
-            background: window.sys,
+            background: '#fff',
           }}
         />
       </div>

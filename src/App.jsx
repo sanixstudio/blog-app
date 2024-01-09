@@ -7,7 +7,7 @@ console.log(BASE_ROUTE);
 
 function App() {
   return (
-    <div className="bg-[#8383830a]">
+    <div className="bg-[#f8f8ff]">
       <Layout>
         <Landing />
       </Layout>

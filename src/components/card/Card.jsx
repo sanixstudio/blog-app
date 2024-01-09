@@ -6,7 +6,7 @@ const Card = ({ post }) => {
   return (
     <a
       href={`/post/${post._id}`}
-      className="flex flex-col justify-between border border-black/10 hover:shadow-2xl hover:border-gray-400 transition ease-in rounded-[16px] overflow-hidden shadow-lg bg-white"
+      className="flex flex-col justify-between hover:shadow-2xl hover:border-gray-400 transition ease-in rounded-[16px] overflow-hidden shadow-lg bg-white"
     >
       <div className="p-4">
         {post.image && (

@@ -91,7 +91,7 @@ const NewPost = () => {
                 Body:
               </label>
             </div>
-            <MarkDownEditor value={body} setValue={setBody} />
+            <MarkDownEditor value={body} setValue={setBody}  />
             <div className="mb-4">
               <label htmlFor="image" className="block text-sm font-medium">
                 Image:
