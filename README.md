@@ -70,7 +70,7 @@ VITE_BASE_URL="provide your base url"
 ```
 
 ## 2. For Back-end
-
+link to backend repo [https://github.com/sanixstudio/blog-app-backend.git](https://github.com/sanixstudio/blog-app-backend.git)
 ### How to run the app
 
 ```
